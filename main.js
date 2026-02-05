@@ -38,14 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return Array.from(numbers).sort((a, b) => a - b);
     };
 
-    const displayNumberWithAnimation = (element, number, index) => {
+    const displayNumberWithAnimation = (element, number, delay) => {
         setTimeout(() => {
             element.textContent = number;
             element.style.backgroundColor = getNumberColor(number);
             element.style.color = 'white';
             element.style.transform = 'translateY(0) scale(1)';
             element.style.opacity = '1';
-        }, index * 50); // Stagger the animation
+        }, delay);
     };
 
     const getNumberColor = (number) => {
@@ -57,26 +57,35 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     generateBtn.addEventListener('click', () => {
+        let totalDelay = 0;
         lottoSets.forEach((set, setIndex) => {
             const lottoNumbers = generateLottoNumbers();
             const numberElements = set.querySelectorAll('.number');
+
             numberElements.forEach((element, index) => {
+                // Clear and hide previous numbers immediately
+                element.textContent = '';
                 element.style.transform = 'translateY(-20px) scale(0.9)';
                 element.style.opacity = '0';
-                displayNumberWithAnimation(element, lottoNumbers[index], index + setIndex * 6);
+
+                // Display new numbers with staggered animation
+                displayNumberWithAnimation(element, lottoNumbers[index], totalDelay);
+                totalDelay += 50; // Increment delay for each number
             });
         });
     });
 
-    // Initial state with animation
-    lottoSets.forEach((set, setIndex) => {
+    // Initial state with animation (clears numbers and animates them in)
+    let initialDelay = 0;
+    lottoSets.forEach((set) => {
         const numberElements = set.querySelectorAll('.number');
-        numberElements.forEach((element, index) => {
+        numberElements.forEach((element) => {
             setTimeout(() => {
                 element.textContent = '';
                 element.style.transform = 'translateY(0) scale(1)';
                 element.style.opacity = '1';
-            }, (index + setIndex * 6) * 50);
+            }, initialDelay);
+            initialDelay += 50;
         });
     });
 });
