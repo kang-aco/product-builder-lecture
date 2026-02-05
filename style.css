@@ -30,7 +30,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     margin: 0;
     background: var(--bg-color);
     color: var(--text-color);
@@ -45,6 +46,8 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
     transition: background 0.3s, box-shadow 0.3s;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
 }
 
 /* Theme switch styles */
@@ -136,10 +139,14 @@ h1 {
     transition: color 0.3s;
 }
 
+#lotto-sets-container {
+    margin-bottom: 40px;
+}
+
 .lotto-numbers {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .number {

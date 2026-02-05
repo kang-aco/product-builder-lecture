@@ -1,8 +1,6 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generate-btn');
-    const numberElements = document.querySelectorAll('.number');
-
+    const lottoSets = document.querySelectorAll('.lotto-numbers');
     const themeSwitch = document.getElementById('checkbox');
 
     const setTheme = (theme) => {
@@ -47,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             element.style.color = 'white';
             element.style.transform = 'translateY(0) scale(1)';
             element.style.opacity = '1';
-        }, index * 100); // Stagger the animation
+        }, index * 50); // Stagger the animation
     };
 
     const getNumberColor = (number) => {
@@ -59,20 +57,26 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     generateBtn.addEventListener('click', () => {
-        const lottoNumbers = generateLottoNumbers();
-        numberElements.forEach((element, index) => {
-            element.style.transform = 'translateY(-20px) scale(0.9)';
-            element.style.opacity = '0';
-            displayNumberWithAnimation(element, lottoNumbers[index], index);
+        lottoSets.forEach((set, setIndex) => {
+            const lottoNumbers = generateLottoNumbers();
+            const numberElements = set.querySelectorAll('.number');
+            numberElements.forEach((element, index) => {
+                element.style.transform = 'translateY(-20px) scale(0.9)';
+                element.style.opacity = '0';
+                displayNumberWithAnimation(element, lottoNumbers[index], index + setIndex * 6);
+            });
         });
     });
 
     // Initial state with animation
-    numberElements.forEach((element, index) => {
-        setTimeout(() => {
-            element.textContent = '';
-            element.style.transform = 'translateY(0) scale(1)';
-            element.style.opacity = '1';
-        }, index * 100);
+    lottoSets.forEach((set, setIndex) => {
+        const numberElements = set.querySelectorAll('.number');
+        numberElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.textContent = '';
+                element.style.transform = 'translateY(0) scale(1)';
+                element.style.opacity = '1';
+            }, (index + setIndex * 6) * 50);
+        });
     });
 });
