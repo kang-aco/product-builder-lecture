@@ -3,6 +3,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generate-btn');
     const numberElements = document.querySelectorAll('.number');
 
+    const themeSwitch = document.getElementById('checkbox');
+
+    const setTheme = (theme) => {
+        document.body.classList.toggle('dark-theme', theme === 'dark');
+        localStorage.setItem('theme', theme);
+        themeSwitch.checked = (theme === 'dark');
+    };
+
+    // Check for saved theme preference or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (prefersDark) {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
+
+    themeSwitch.addEventListener('change', () => {
+        if (themeSwitch.checked) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    });
+
     const generateLottoNumbers = () => {
         const numbers = new Set();
         while (numbers.size < 6) {

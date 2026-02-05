@@ -1,3 +1,29 @@
+/* Theme variables */
+:root {
+    --bg-color: #f0f2f5;
+    --container-bg: white;
+    --text-color: #333;
+    --h1-color: #333;
+    --number-bg: #f8f9fa;
+    --number-color: #555;
+    --btn-bg: #007bff;
+    --btn-hover-bg: #0056b3;
+    --btn-shadow: rgba(0, 123, 255, 0.3);
+    --btn-hover-shadow: rgba(0, 123, 255, 0.4);
+}
+
+.dark-theme {
+    --bg-color: #2c2c2c;
+    --container-bg: #3c3c3c;
+    --text-color: #e0e0e0;
+    --h1-color: #e0e0e0;
+    --number-bg: #4a4a4a;
+    --number-color: #f0f0f0;
+    --btn-bg: #6200ea;
+    --btn-hover-bg: #3700b3;
+    --btn-shadow: rgba(98, 0, 234, 0.3);
+    --btn-hover-shadow: rgba(98, 0, 234, 0.4);
+}
 
 body {
     font-family: 'Helvetica Neue', sans-serif;
@@ -6,17 +32,89 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: #f0f2f5;
-    color: #333;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
 }
 
 .container {
     text-align: center;
-    background: white;
+    background: var(--container-bg);
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Theme switch styles */
+.theme-switch-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #6200ea;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #6200ea;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 
 @keyframes fadeIn {
@@ -33,8 +131,9 @@ body {
 h1 {
     margin-bottom: 30px;
     font-size: 2.5em;
-    color: #333;
+    color: var(--h1-color);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    transition: color 0.3s;
 }
 
 .lotto-numbers {
@@ -51,10 +150,10 @@ h1 {
     height: 60px;
     margin: 0 10px;
     border-radius: 50%;
-    background-color: #f8f9fa;
+    background-color: var(--number-bg);
     font-size: 1.8em;
     font-weight: bold;
-    color: #555;
+    color: var(--number-color);
     box-shadow: 0 4px 8px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
 }
@@ -63,23 +162,23 @@ h1 {
     padding: 15px 30px;
     border: none;
     border-radius: 10px;
-    background-color: #007bff;
+    background-color: var(--btn-bg);
     color: white;
     font-size: 1.2em;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 12px var(--btn-shadow);
 }
 
 #generate-btn:hover {
-    background-color: #0056b3;
-    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+    background-color: var(--btn-hover-bg);
+    box-shadow: 0 6px 16px var(--btn-hover-shadow);
     transform: translateY(-2px);
 }
 
 #generate-btn:active {
     transform: translateY(0);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 12px var(--btn-shadow);
 }
 
 @media (max-width: 600px) {
