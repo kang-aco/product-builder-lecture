@@ -1,7 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generate-btn');
-    const lottoSets = document.querySelectorAll('.lotto-numbers');
+    const recommendationElement = document.querySelector('.recommendation');
     const themeSwitch = document.getElementById('checkbox');
+
+    const dinnerMenus = [
+        '김치찌개', '된장찌개', '불고기', '비빔밥', '삼겹살',
+        '치킨', '피자', '떡볶이', '파스타', '초밥',
+        '카레', '짜장면', '짬뽕', '탕수육', '스테이크',
+        '부대찌개', '닭갈비', '제육볶음', '갈비찜', '간장게장'
+    ];
 
     const setTheme = (theme) => {
         document.body.classList.toggle('dark-theme', theme === 'dark');
@@ -29,63 +36,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const generateLottoNumbers = () => {
-        const numbers = new Set();
-        while (numbers.size < 6) {
-            const randomNumber = Math.floor(Math.random() * 45) + 1;
-            numbers.add(randomNumber);
-        }
-        return Array.from(numbers).sort((a, b) => a - b);
+    const generateDinnerMenu = () => {
+        const randomIndex = Math.floor(Math.random() * dinnerMenus.length);
+        return dinnerMenus[randomIndex];
     };
 
-    const displayNumberWithAnimation = (element, number, delay) => {
+    const displayMenuWithAnimation = (element, menu, delay) => {
         setTimeout(() => {
-            element.textContent = number;
-            element.style.backgroundColor = getNumberColor(number);
-            element.style.color = 'white';
+            element.textContent = menu;
             element.style.transform = 'translateY(0) scale(1)';
             element.style.opacity = '1';
         }, delay);
     };
 
-    const getNumberColor = (number) => {
-        if (number <= 10) return '#fbc400'; // Yellow
-        if (number <= 20) return '#69c8f2'; // Blue
-        if (number <= 30) return '#ff7272'; // Red
-        if (number <= 40) return '#aaaaaa'; // Gray
-        return '#b0d840'; // Green
-    };
-
     generateBtn.addEventListener('click', () => {
-        let totalDelay = 0;
-        lottoSets.forEach((set, setIndex) => {
-            const lottoNumbers = generateLottoNumbers();
-            const numberElements = set.querySelectorAll('.number');
+        // Clear and hide previous menu immediately
+        recommendationElement.textContent = '';
+        recommendationElement.style.transform = 'translateY(-20px) scale(0.9)';
+        recommendationElement.style.opacity = '0';
 
-            numberElements.forEach((element, index) => {
-                // Clear and hide previous numbers immediately
-                element.textContent = '';
-                element.style.transform = 'translateY(-20px) scale(0.9)';
-                element.style.opacity = '0';
-
-                // Display new numbers with staggered animation
-                displayNumberWithAnimation(element, lottoNumbers[index], totalDelay);
-                totalDelay += 50; // Increment delay for each number
-            });
-        });
+        const recommendedMenu = generateDinnerMenu();
+        displayMenuWithAnimation(recommendationElement, recommendedMenu, 100); // Small delay for animation
     });
 
-    // Initial state with animation (clears numbers and animates them in)
-    let initialDelay = 0;
-    lottoSets.forEach((set) => {
-        const numberElements = set.querySelectorAll('.number');
-        numberElements.forEach((element) => {
-            setTimeout(() => {
-                element.textContent = '';
-                element.style.transform = 'translateY(0) scale(1)';
-                element.style.opacity = '1';
-            }, initialDelay);
-            initialDelay += 50;
-        });
-    });
+    // Initial state
+    recommendationElement.textContent = '오늘의 추천 메뉴';
+    recommendationElement.style.transform = 'translateY(0) scale(1)';
+    recommendationElement.style.opacity = '1';
 });

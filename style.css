@@ -139,30 +139,33 @@ h1 {
     transition: color 0.3s;
 }
 
-#lotto-sets-container {
+#menu-recommendation-container {
     margin-bottom: 40px;
 }
 
-.lotto-numbers {
+.menu-item {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.number {
+.recommendation {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
-    margin: 0 10px;
-    border-radius: 50%;
-    background-color: var(--number-bg);
-    font-size: 1.8em;
+    min-width: 250px; /* Wider to accommodate menu names */
+    height: 80px; /* Taller */
+    padding: 0 20px;
+    border-radius: 15px; /* Slightly more rounded */
+    background-color: var(--number-bg); /* Reusing number-bg for consistency */
+    font-size: 2em; /* Larger font for menu names */
     font-weight: bold;
     color: var(--number-color);
     box-shadow: 0 4px 8px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent menu name from wrapping */
+    overflow: hidden; /* Hide overflow if too long */
+    text-overflow: ellipsis; /* Add ellipsis if text is truncated */
 }
 
 #generate-btn {
