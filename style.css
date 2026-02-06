@@ -231,3 +231,91 @@ h1 {
         padding: 12px;
     }
 }
+
+/* Affiliate Form Styles */
+.form-container {
+    background: var(--container-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.form-container h2 {
+    color: var(--h1-color);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#affiliate-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+#affiliate-form input[type="text"],
+#affiliate-form input[type="email"],
+#affiliate-form textarea {
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width */
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: var(--number-bg);
+    color: var(--number-color);
+    transition: border-color 0.3s;
+}
+
+#affiliate-form input[type="text"]:focus,
+#affiliate-form input[type="email"]:focus,
+#affiliate-form textarea:focus {
+    border-color: var(--btn-bg);
+    outline: none;
+}
+
+#affiliate-form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--btn-bg);
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    box-shadow: 0 4px 12px var(--btn-shadow);
+}
+
+#affiliate-form button[type="submit"]:hover {
+    background-color: var(--btn-hover-bg);
+    box-shadow: 0 6px 16px var(--btn-hover-shadow);
+    transform: translateY(-2px);
+}
+
+#affiliate-form button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px var(--btn-shadow);
+}
+
+#form-success-message {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Ensure .hidden class works for the success message */
+.hidden {
+    display: none;
+}
