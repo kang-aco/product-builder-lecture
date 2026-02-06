@@ -168,6 +168,21 @@ h1 {
     text-overflow: ellipsis; /* Add ellipsis if text is truncated */
 }
 
+.menu-image {
+    max-width: 250px; /* Adjust as needed */
+    max-height: 250px; /* Adjust as needed */
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    object-fit: contain; /* Ensure the image fits within its bounds */
+}
+
+.hidden {
+    display: none;
+}
+
 #generate-btn {
     padding: 15px 30px;
     border: none;

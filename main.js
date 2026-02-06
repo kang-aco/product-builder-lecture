@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generate-btn');
-    const recommendationElement = document.querySelector('.recommendation');
+    const recommendationText = document.querySelector('.recommendation');
+    const recommendationImage = document.querySelector('.menu-image');
     const themeSwitch = document.getElementById('checkbox');
 
     const dinnerMenus = [
@@ -41,26 +42,40 @@ document.addEventListener('DOMContentLoaded', () => {
         return dinnerMenus[randomIndex];
     };
 
-    const displayMenuWithAnimation = (element, menu, delay) => {
+    const displayRecommendationWithAnimation = (menu, delay) => {
+        // Hide both elements initially
+        recommendationText.classList.add('hidden');
+        recommendationImage.classList.add('hidden');
+        recommendationText.style.transform = 'translateY(-20px) scale(0.9)';
+        recommendationImage.style.transform = 'translateY(-20px) scale(0.9)';
+        recommendationText.style.opacity = '0';
+        recommendationImage.style.opacity = '0';
+
         setTimeout(() => {
-            element.textContent = menu;
-            element.style.transform = 'translateY(0) scale(1)';
-            element.style.opacity = '1';
+            if (menu === '피자') {
+                recommendationImage.classList.remove('hidden');
+                recommendationText.classList.add('hidden');
+                recommendationImage.style.transform = 'translateY(0) scale(1)';
+                recommendationImage.style.opacity = '1';
+            } else {
+                recommendationText.classList.remove('hidden');
+                recommendationImage.classList.add('hidden');
+                recommendationText.textContent = menu;
+                recommendationText.style.transform = 'translateY(0) scale(1)';
+                recommendationText.style.opacity = '1';
+            }
         }, delay);
     };
 
     generateBtn.addEventListener('click', () => {
-        // Clear and hide previous menu immediately
-        recommendationElement.textContent = '';
-        recommendationElement.style.transform = 'translateY(-20px) scale(0.9)';
-        recommendationElement.style.opacity = '0';
-
         const recommendedMenu = generateDinnerMenu();
-        displayMenuWithAnimation(recommendationElement, recommendedMenu, 100); // Small delay for animation
+        displayRecommendationWithAnimation(recommendedMenu, 100); // Small delay for animation
     });
 
     // Initial state
-    recommendationElement.textContent = '오늘의 추천 메뉴';
-    recommendationElement.style.transform = 'translateY(0) scale(1)';
-    recommendationElement.style.opacity = '1';
+    recommendationText.textContent = '오늘의 추천 메뉴';
+    recommendationText.classList.remove('hidden');
+    recommendationImage.classList.add('hidden');
+    recommendationText.style.transform = 'translateY(0) scale(1)';
+    recommendationText.style.opacity = '1';
 });
