@@ -78,4 +78,34 @@ document.addEventListener('DOMContentLoaded', () => {
     recommendationImage.classList.add('hidden');
     recommendationText.style.transform = 'translateY(0) scale(1)';
     recommendationText.style.opacity = '1';
+
+    // Affiliate Form Submission
+    const affiliateForm = document.getElementById('affiliate-form');
+    const formSuccessMessage = document.getElementById('form-success-message');
+
+    if (affiliateForm) {
+        affiliateForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(affiliateForm);
+            const response = await fetch(affiliateForm.action, {
+                method: affiliateForm.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                formSuccessMessage.classList.remove('hidden'); // Show success message
+                affiliateForm.reset(); // Clear form fields
+
+                setTimeout(() => {
+                    formSuccessMessage.classList.add('hidden'); // Hide success message after 5 seconds
+                }, 5000);
+            } else {
+                alert('폼 제출에 실패했습니다. 다시 시도해 주세요.'); // Or a more elaborate error display
+            }
+        });
+    }
 });
