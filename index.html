@@ -24,6 +24,27 @@
         </div>
         <button id="generate-btn">메뉴 추천 받기</button>
     </div>
+    <div class="form-container">
+        <h2>제휴 문의</h2>
+        <form id="affiliate-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <!-- IMPORTANT: Replace YOUR_FORM_ID with your actual Formspree form ID for the form to work. -->
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="company">회사명:</label>
+            <input type="text" id="company" name="company">
+
+            <label for="message">메시지:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">보내기</button>
+        </form>
+        <p id="form-success-message" class="hidden">문의해주셔서 감사합니다! 최대한 빨리 답변드리겠습니다.</p>
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>
